@@ -1,15 +1,14 @@
 require_relative 'hipster'
 require_relative 'samuel'
 require_relative 'standard'
-
 require 'sinatra'
 
 get "/" do
-  "Welcome !"
+  "Hello World"
 end
 
 get "/:name" do
-  "Welcome #{params[:name]} !"
+  "Hi there, #{params[:name]}"
 end
 
 get "/lorem/:ipsum" do

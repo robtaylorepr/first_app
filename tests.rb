@@ -28,8 +28,16 @@ class FirstAppTest < Test::Unit::TestCase
   end
 
   def test_lipsums_page
-    # TODO: Fill me in to check each lipsum you support.
+    get "/lorem/hipster"
+    assert last_response.ok?
+    assert_equal "I am hip",last_response.body
+
+    get "/lorem/samuel"
+    assert last_response.ok?
+    assert_equal "samuel says",last_response.body
+
+    get "/lorem/standard"
+    assert last_response.ok?
+    assert_equal "standard",last_response.body
   end
-
-
 end
