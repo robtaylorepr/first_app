@@ -1,6 +1,13 @@
+require 'active_record'
+
+ActiveRecord::Base.establish_connection(
+  adapter:  'sqlite3',
+  database: 'development.sqlite3'
+  )
 require_relative 'hipster'
 require_relative 'samuel'
 require_relative 'standard'
+require_relative 'ipsum'
 require 'sinatra'
 
 get "/" do
@@ -12,8 +19,12 @@ get "/:name" do
 end
 
 get "/lorem/:ipsum" do
-  if %w(standard hipster samuel).include? params[:ipsum]
-    Object.const_get(params[:ipsum].capitalize).call
+  title = params[:ipsum]
+  text = Ipsum.find_by(:name==title).get_text
+  if %w(standard hipster samuel).include? title
+    text.upcase
+  # elsif %w(standard hipster samuel).include? params[:ipsum]
+    # Object.const_get(params[:ipsum].capitalize).call
   else
     redirect "/not_found"
   end
